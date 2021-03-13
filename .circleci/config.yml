@@ -12,12 +12,12 @@ jobs:
       - run:
           name: Build Docker image
           command: |
-            docker build -t quacker-frontend:latest .
+            docker build -t quackernl/quacker-frontend:latest .
       - run:
           name: Push Docker Image
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker push quacker-frontend:latest
+            docker push quackernl/quacker-frontend:latest
 workflows:
   version: 2
   build-master:
