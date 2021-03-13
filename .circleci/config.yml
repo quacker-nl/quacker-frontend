@@ -6,8 +6,10 @@ orbs:
   welcome: circleci/welcome-orb@0.4.1
 # Orchestrate or schedule a set of jobs
 workflows:
-  # Name the workflow "welcome"
-  welcome:
-    # Run the welcome/run job in its own container
+  version: 2
+  build_master:
     jobs:
-      - welcome/run
+      - build:
+          filters:
+            branches:
+              only: master
