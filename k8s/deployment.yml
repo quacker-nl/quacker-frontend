@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quacker-frontend
+  namespace: default
+  labels:
+    app: quacker-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: quacker-frontend
+  template:
+    metadata:
+      labels:
+        app: quacker-frontend
+    spec:
+      containers:
+        - name: quacker-frontend
+          image: quackernl/quacker-frontend:latest
+          ports:
+            - containerPort: 80
+              name: http
