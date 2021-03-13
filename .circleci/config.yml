@@ -3,9 +3,6 @@ jobs:
   build:
     docker:
       - image: circleci/buildpack-deps:stretch
-    environment:
-      IMAGE_NAME: quackernl/$IMAGE_NAME
-    working_directory: ~/app
     steps:
       - checkout
       - setup_remote_docker
