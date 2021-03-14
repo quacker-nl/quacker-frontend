@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Quacker updated 😎" />
+    <HelloWorld msg="het werkt ik ben zo blij :D 😀" />
   </div>
 </template>
 
