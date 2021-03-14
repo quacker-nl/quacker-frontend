@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Quacker 🦆</h1>
+    <h1>Quacker 🦆🦆🦆🦆🦆🦆</h1>
   </div>
 </template>
 
