@@ -35,7 +35,9 @@ jobs:
             chmod u+x ./kubectl
       - run:
           name: Deploy Code
-          command: echo "made it"
+          command: |
+            kubectl apply -f k8s
+            kubectl rollout restart deployment/${IMAGE_NAME}
 workflows:
   version: 2
   build-master:

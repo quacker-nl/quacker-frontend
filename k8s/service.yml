@@ -2,14 +2,10 @@ apiVersion: v1
 kind: Service
 metadata:
   name: quacker-frontend
-  namespace: default
-  labels:
-    app: quacker-frontend
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - port: 80
-      targetPort: http
-      name: http
+      targetPort: 80
   selector:
     app: quacker-frontend
