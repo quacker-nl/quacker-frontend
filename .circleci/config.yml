@@ -4,6 +4,8 @@ jobs:
     docker:
       - image: node:latest
     steps:
+      - checkout
+      - setup_remote_docker
       - run:
           name: Install dependencies
           command: |
@@ -15,9 +17,6 @@ jobs:
   deploy:
     docker:
       - image: circleci/buildpack-deps:stretch
-    environment:
-      IMAGE_NAME: quackernl/$IMAGE_NAME
-    working_directory: ~/app
     steps:
       - checkout
       - setup_remote_docker
