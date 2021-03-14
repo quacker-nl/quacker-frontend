@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Quacker 🦆🦆🦆🦆🦆🦆</h1>
+    <h1>Quacker 🦆🦆🦆🦆🦆🦆 (nieuwe update)</h1>
     <form>
       <input type="text" placeholder="username" />
       <input type="password" placeholder="password" />
