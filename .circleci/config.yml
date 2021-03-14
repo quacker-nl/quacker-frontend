@@ -41,7 +41,7 @@ jobs:
           name: Deploy Code
           command: |
             kubectl apply -f k8s
-            kubectl rollout restart deployment/${IMAGE_NAME}
+            kubectl rollout restart deployment/quacker-frontend
 workflows:
   version: 2
   build-master:
