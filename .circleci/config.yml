@@ -2,6 +2,18 @@ version: 2.1
 jobs:
   build:
     docker:
+      - image: node:latest
+    steps:
+      - run:
+          name: Install dependencies
+          command: |
+            npm install
+      - run:
+          name: Build project
+          command: |
+            npm run build
+  deploy:
+    docker:
       - image: circleci/buildpack-deps:stretch
     environment:
       IMAGE_NAME: quackernl/$IMAGE_NAME
@@ -50,3 +62,6 @@ workflows:
           filters:
             branches:
               only: main
+      - deploy:
+          requires:
+            - build
