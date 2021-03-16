@@ -51,8 +51,8 @@ jobs:
       - run:
           name: Deploy Code
           command: |
-            kubectl apply -f k8s/deployment.yml
-            kubectl apply -f k8s/service.yml
+            kubectl apply -f k8s/quacker-frontend-deployment.yml
+            kubectl apply -f k8s/quacker-frontend-service.yml
             kubectl rollout restart deployment/quacker-frontend
 workflows:
   version: 2
@@ -65,3 +65,5 @@ workflows:
       - deploy:
           requires:
             - build
+          context:
+            - quacker
