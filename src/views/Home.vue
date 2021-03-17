@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <h1>Quacker 🦆🦆🦆🦆🦆🦆 (nieuwe update)</h1>
+    <h1>🦆Welcome to Quacker🦆</h1>
+    <p>(met cloudflare)</p>
     <form>
       <input type="text" placeholder="username" />
       <input type="password" placeholder="password" />
