@@ -2,6 +2,7 @@
   <div class="home">
     <h1>🦆Welcome to Quacker🦆</h1>
     <p>(met cloudflare)</p>
+    <p>pogchamp</p>
     <form>
       <input type="text" placeholder="username" />
       <input type="password" placeholder="password" />
