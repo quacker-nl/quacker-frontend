@@ -51,6 +51,7 @@ jobs:
       - run:
           name: Deploy Code
           command: |
+            kubectl config set-context --current --namespace=$QUACKER_NAMESPACE
             kubectl apply -f k8s/quacker-frontend-deployment.yml
             kubectl apply -f k8s/quacker-frontend-service.yml
             kubectl rollout restart deployment/quacker-frontend
