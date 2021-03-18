@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>🦆Welcome to Quacker🦆</h1>
+    <h1>🦆Welcome to Quacker🦆 (versie 2)</h1>
     <div class="whats-happening">
       <h2>What's happening?</h2>
       <div class="quack">
