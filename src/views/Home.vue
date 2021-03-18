@@ -62,4 +62,4 @@ export default {
 };
 </script>
 
-<style scoped src="@/styles/home.css"></style>
+<style lang="scss" scoped></style>

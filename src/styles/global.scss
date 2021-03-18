@@ -1,0 +1,35 @@
+@import '~vue-material/dist/theme/engine';
+
+@include md-register-theme(
+  'default',
+  (
+    primary: md-get-palette-color(lightblue, A200),
+    // The primary color of your application
+      accent: md-get-palette-color(blue, A200),
+    // The accent or secondary color
+      theme: dark // This can be dark or light,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  )
+);
+
+@import '~vue-material/dist/theme/all';
+
+html,
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  background-color: #000d31 !important;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+}
+
+button {
+  width: 100%;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  text-transform: none !important;
+  border-radius: 2.5em !important;
+  height: 46px !important;
+  color: white !important;
+}
