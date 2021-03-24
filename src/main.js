@@ -8,6 +8,15 @@ import 'vue-material/dist/vue-material.min.css';
 Vue.use(VueMaterial);
 Vue.config.productionTip = false;
 
+Vue.config.errorHandler = (err, vm, info) => {
+  if (process.env.NODE_ENV !== 'production') {
+    // Show any error but this one
+    if (err.message !== "Cannot read property 'badInput' of undefined") {
+      console.error(err);
+    }
+  }
+};
+
 new Vue({
   router,
   store,

@@ -1,0 +1,32 @@
+#signup {
+  cursor: pointer;
+}
+
+.logo-container {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.md-dialog-container {
+  width: 748px;
+}
+
+.signup-button {
+  width: 100%;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  text-transform: none !important;
+  border-radius: 2.5em !important;
+  height: 46px !important;
+  color: white !important;
+}
+
+.close-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  text-transform: none !important;
+  border-radius: 2.5em !important;
+  color: white !important;
+}

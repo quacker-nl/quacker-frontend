@@ -2,7 +2,7 @@
   <div class="login">
     <div class="login-main">
       <div class="login-header">
-        <img class="logo" src="../assets/logo.png" alt="logo" />
+        <img class="logo" src="@/assets/logo.png" alt="logo" />
         <h1>Log in to Quacker</h1>
       </div>
       <div class="login-body">
@@ -14,17 +14,27 @@
           <label>Password</label>
           <md-input type="password"></md-input>
         </md-field>
-        <md-button class="md-raised md-primary">Log in</md-button>
+        <md-button class="login-button md-raised md-primary">Log in</md-button>
       </div>
+
       <div class="login-footer">
-        <a id="signup">Sign up for Quacker</a>
+        <RegistrationDialog />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import RegistrationDialog from '@/components/RegistrationDialog.vue';
+
+export default {
+  data() {
+    return {};
+  },
+  components: {
+    RegistrationDialog,
+  },
+};
 </script>
 
-<style lang="scss" scoped src="@/styles/login.scss"></style>
+<style scoped src="@/styles/login.css"></style>
