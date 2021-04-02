@@ -8,17 +8,14 @@
   margin-top: 20px;
 }
 
-.md-dialog-container {
-  width: 748px;
-}
-
 .signup-button {
   width: 100%;
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-  text-transform: none !important;
-  border-radius: 2.5em !important;
-  height: 46px !important;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 90px;
+  text-transform: none;
+  border-radius: 2.5em;
+  height: 46px;
   color: white !important;
 }
 
@@ -26,7 +23,7 @@
   position: absolute;
   right: 0;
   top: 0;
-  text-transform: none !important;
-  border-radius: 2.5em !important;
+  text-transform: none;
+  border-radius: 2.5em;
   color: white !important;
 }
