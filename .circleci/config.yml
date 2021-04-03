@@ -33,9 +33,8 @@ jobs:
           name: Push Docker Image
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker tag quackernl/quacker-frontend:staging quackernl/quacker-frontend:staging-$CIRCLE_SHA1
+            docker tag quackernl/quacker-frontend:staging
             docker push quackernl/quacker-frontend:staging
-            docker push quackernl/quacker-frontend:staging-$CIRCLE_SHA1
       - run:
           name: Install doctl
           command: |
