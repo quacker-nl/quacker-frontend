@@ -33,9 +33,9 @@ jobs:
           name: Push Docker Image
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker tag quackernl/quacker-frontend:latest quackernl/quacker-frontend:$CIRCLE_SHA1
-            docker push quackernl/quacker-frontend:latest
-            docker push quackernl/quacker-frontend:$CIRCLE_SHA1
+            docker tag quackernl/quacker-frontend:staging quackernl/quacker-frontend:staging-$CIRCLE_SHA1
+            docker push quackernl/quacker-frontend:staging
+            docker push quackernl/quacker-frontend:staging-$CIRCLE_SHA1
       - run:
           name: Install doctl
           command: |
@@ -120,6 +120,5 @@ workflows:
           type: approval
           requires:
             - stage
-            - build
           context:
             - quacker
