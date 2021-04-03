@@ -70,7 +70,7 @@ jobs:
       - run:
           name: Build Docker image
           command: |
-            docker build -t quackernl/quacker-frontend:latest .
+            docker build -t quackernl/quacker-frontend:latest --build-arg ENVIRONMENT=production .
       - run:
           name: Push Docker Image
           command: |
