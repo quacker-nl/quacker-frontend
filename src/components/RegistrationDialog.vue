@@ -21,12 +21,16 @@
           <label>Email</label>
           <md-input v-model="registration.email"></md-input>
         </md-field>
+        <md-field>
+          <label>Password</label>
+          <md-input type="password" v-model="registration.password"></md-input>
+        </md-field>
         <div class="md-layout md-gutter">
           <div class="md-layout-item">
             <md-field>
               <label for="month">Month</label>
               <md-select
-                v-model="registration.birthDate.month"
+                v-model="registration.birthdate.month"
                 name="month"
                 id="month"
               >
@@ -50,7 +54,7 @@
             <md-field>
               <label for="day">Day</label>
               <md-select
-                v-model="registration.birthDate.day"
+                v-model="registration.birthdate.day"
                 name="day"
                 id="day"
               >
@@ -65,7 +69,7 @@
             <md-field>
               <label for="year">Year</label>
               <md-select
-                v-model="registration.birthDate.year"
+                v-model="registration.birthdate.year"
                 name="year"
                 id="year"
               >
@@ -76,7 +80,9 @@
             </md-field>
           </div>
         </div>
-        <md-button class="signup-button md-raised md-primary"
+        <md-button
+          @click="handleRegistration"
+          class="signup-button md-raised md-primary"
           >Sign up</md-button
         >
       </md-dialog-content>
@@ -98,7 +104,8 @@ export default {
       registration: {
         username: null,
         email: null,
-        birthDate: {
+        password: null,
+        birthdate: {
           month: null,
           day: null,
           year: null,
@@ -107,6 +114,11 @@ export default {
     };
   },
   methods: {
+    handleRegistration() {
+      this.$store.dispatch('auth/register', this.registration).then(() => {
+        this.showRegistrationDialog = false;
+      });
+    },
     daysInMonth(month, year) {
       if (month == null) {
         return 31;
@@ -122,8 +134,8 @@ export default {
       return Array.from(
         {
           length: this.daysInMonth(
-            this.registration.birthDate.month,
-            this.registration.birthDate.year
+            this.registration.birthdate.month,
+            this.registration.birthdate.year
           ),
         },
         (value, index) => 1 + index

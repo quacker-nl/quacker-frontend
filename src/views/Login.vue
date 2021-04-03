@@ -8,13 +8,17 @@
       <div class="login-body">
         <md-field>
           <label>Email or username</label>
-          <md-input></md-input>
+          <md-input v-model="user.username"></md-input>
         </md-field>
         <md-field>
           <label>Password</label>
-          <md-input type="password"></md-input>
+          <md-input v-model="user.password" type="password"></md-input>
         </md-field>
-        <md-button class="login-button md-raised md-primary">Log in</md-button>
+        <md-button
+          @click="handleLogin"
+          class="login-button md-raised md-primary"
+          >Log in</md-button
+        >
       </div>
 
       <div class="login-footer">
@@ -26,10 +30,20 @@
 
 <script>
 import RegistrationDialog from '@/components/RegistrationDialog.vue';
+import User from '@/models/user';
 
 export default {
   data() {
-    return {};
+    return {
+      user: new User(null, null),
+    };
+  },
+  methods: {
+    handleLogin() {
+      this.$store.dispatch('auth/login', this.user).then(() => {
+        this.$router.push('/');
+      });
+    },
   },
   components: {
     RegistrationDialog,

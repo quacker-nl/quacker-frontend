@@ -8,11 +8,15 @@
       accent: md-get-palette-color(blue, A200),
     // The accent or secondary color
       theme: dark
-      // This can be dark or light,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+      // This can be dark or light,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
   )
 );
 
 @import '~vue-material/dist/theme/all';
+
+// colors
+$primary: #000d31;
+$secondary: #001140;
 
 // breakpoints
 $screen-sm-min: 600px;
@@ -27,12 +31,12 @@ $screen-sm-min: 600px;
 
 html,
 body {
-  background-color: #000d31;
+  background-color: $primary;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
 .md-dialog-container {
-  background-color: #000d31 !important;
+  background-color: $primary !important;
   width: 748px;
   height: 794px;
   @include sm {
@@ -40,8 +44,24 @@ body {
   }
 }
 
+.md-select-menu {
+  background-color: $primary !important;
+}
+
 .md-overlay {
   background-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.md-list {
+  background-color: $secondary !important;
+}
+
+.md-scrollbar::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.md-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #40c4ff !important;
 }
 
 .logo {
