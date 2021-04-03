@@ -9,6 +9,7 @@ spec:
     - hosts:
         - staging.quacker.nl
       secretName: testsecret-tls
+  rules:
     - host: 'staging.quacker.nl'
       http:
         paths:
