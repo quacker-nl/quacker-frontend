@@ -57,9 +57,9 @@ jobs:
           name: Deploy Code
           command: |
             kubectl config set-context --current --namespace=$QUACKER_STAGING_NAMESPACE
-            kubectl apply -f k8s/quacker-frontend-deployment.yml
-            kubectl apply -f k8s/quacker-frontend-service.yml 
-            kubectl apply -f k8s/quacker-staging-frontend-ingress.yml
+            kubectl apply -f k8s/staging/quacker-frontend-deployment.yml
+            kubectl apply -f k8s/staging/quacker-frontend-service.yml 
+            kubectl apply -f k8s/staging/quacker-staging-frontend-ingress.yml
             kubectl rollout restart deployment/quacker-frontend
   deploy:
     docker:
@@ -99,9 +99,9 @@ jobs:
           name: Deploy Code
           command: |
             kubectl config set-context --current --namespace=$QUACKER_PROD_NAMESPACE
-            kubectl apply -f k8s/quacker-frontend-deployment.yml
-            kubectl apply -f k8s/quacker-frontend-service.yml 
-            kubectl apply -f k8s/quacker-frontend-ingress.yml
+            kubectl apply -f k8s/production/quacker-frontend-deployment.yml
+            kubectl apply -f k8s/production/quacker-frontend-service.yml 
+            kubectl apply -f k8s/production/quacker-frontend-ingress.yml
             kubectl rollout restart deployment/quacker-frontend
 workflows:
   version: 2
