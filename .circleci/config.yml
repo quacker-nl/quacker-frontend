@@ -28,7 +28,7 @@ jobs:
       - run:
           name: Build Docker image
           command: |
-            docker build --build-arg ENV=staging -t quackernl/quacker-frontend:staging .
+            docker build -t quackernl/quacker-frontend:staging --build-arg ENVIRONMENT=staging .
       - run:
           name: Push Docker Image
           command: |
@@ -70,7 +70,7 @@ jobs:
       - run:
           name: Build Docker image
           command: |
-            docker build --build-arg ENV=production -t quackernl/quacker-frontend:latest .
+            docker build -t quackernl/quacker-frontend:latest .
       - run:
           name: Push Docker Image
           command: |
