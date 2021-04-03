@@ -116,9 +116,12 @@ workflows:
             - build
           context:
             - quacker
-
-      - deploy:
+      - acceptance testing:
+          type: approval
           requires:
             - stage
+      - deploy:
+          requires:
+            - acceptance testing
           context:
             - quacker
