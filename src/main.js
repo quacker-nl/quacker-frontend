@@ -17,6 +17,8 @@ Vue.config.errorHandler = (err, vm, info) => {
   }
 };
 
+document.title = process.env.VUE_APP_TITLE;
+
 new Vue({
   router,
   store,
