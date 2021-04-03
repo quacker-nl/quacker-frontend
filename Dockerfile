@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install 
 COPY . .
-RUN npm run build -- --mode $ENVIRONMENT
+RUN npm run build -- --mode production
 
 # production stage
 FROM nginx:stable-alpine as production-stage
