@@ -120,6 +120,7 @@ workflows:
           filters:
             branches:
               only: main
+      - sonarcloud:
           context: sonarcloud
       - stage:
           requires:
