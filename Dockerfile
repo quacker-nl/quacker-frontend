@@ -1,11 +1,10 @@
-ARG ENVIRONMENT
-
 # build 
 FROM node:lts-alpine as build-stage
 WORKDIR /app
 COPY package*.json ./
 RUN npm install 
 COPY . .
+ARG ENVIRONMENT
 RUN npm run build -- --mode $ENVIRONMENT
 
 # production stage
