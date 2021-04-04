@@ -6,7 +6,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - sonarcloud/scan
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
@@ -20,6 +19,13 @@ jobs:
           name: Build project
           command: |
             npm run build
+  sonarcloud:
+    docker:
+      - image: node:latest
+    steps:
+      - checkout
+      - setup_remote_docker
+      - sonarcloud/scan
   stage:
     docker:
       - image: circleci/buildpack-deps:stretch
