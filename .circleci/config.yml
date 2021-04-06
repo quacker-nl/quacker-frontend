@@ -116,10 +116,10 @@ workflows:
   version: 2
   build-master:
     jobs:
-      - build:
-          filters:
-            branches:
-              only: main
+      # - build:
+      #     filters:
+      #       branches:
+      #         only: main
       - sonarcloud:
           context: sonarcloud
       - stage:
