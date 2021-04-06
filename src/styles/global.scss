@@ -8,7 +8,7 @@
       accent: md-get-palette-color(blue, A200),
     // The accent or secondary color
       theme: dark
-      // This can be dark or light,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+      // This can be dark or light,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
   )
 );
 
@@ -122,19 +122,6 @@ ul {
   list-style-type: none; /* Remove bullets */
   padding: 0; /* Remove padding */
   margin: 0; /* Remove margins */
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 35px;
-  cursor: pointer;
-}
-
-.logo-container .logo {
-  width: 40px !important;
-  height: 40px !important;
-  margin-right: 8px;
 }
 
 .active {

@@ -1,6 +1,7 @@
 import AuthService from '../services/auth.service';
+import Cookies from 'js-cookie';
 
-const user = JSON.parse(localStorage.getItem('user'));
+var user = Cookies.getJSON('user');
 const initialState = user
   ? { status: { loggedIn: true }, user }
   : { status: { loggedIn: false }, user: null };
