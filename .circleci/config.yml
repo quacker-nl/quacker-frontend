@@ -123,8 +123,9 @@ workflows:
       - sonarcloud:
           context: sonarcloud
       - stage:
-          requires:
-            - build
+          filters:
+            branches:
+              only: main
           context:
             - quacker
       - acceptance testing:
