@@ -2,19 +2,14 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: node:latest
+      - image: node:lts-alpine
     steps:
       - checkout
       - setup_remote_docker
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: Install dependencies
-          command: npm install
-      - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
-          paths:
-            - ./node_modules
+          command: |
+            npm install
       - run:
           name: Build project
           command: |
@@ -116,16 +111,15 @@ workflows:
   version: 2
   build-master:
     jobs:
-      # - build:
-      #     filters:
-      #       branches:
-      #         only: main
-      - sonarcloud:
-          context: sonarcloud
-      - stage:
+      - build:
           filters:
             branches:
               only: main
+      - sonarcloud:
+          context: sonarcloud
+      - stage:
+          requires:
+            - build
           context:
             - quacker
       - acceptance testing:
