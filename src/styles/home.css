@@ -1,0 +1,12 @@
+.nav-col {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.main-col {
+  border-left: solid #a7a7a7 1px;
+  border-right: solid #a7a7a7 1px;
+}
+
+.side-col {
+}
