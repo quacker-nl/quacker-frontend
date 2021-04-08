@@ -4,7 +4,17 @@ import router from './router';
 import store from './store';
 import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.min.css';
+import VueMq from 'vue-mq';
 
+Vue.use(VueMq, {
+  breakpoints: {
+    // default breakpoints - customize this
+    sm: 600,
+    md: 1005,
+    lg: Infinity,
+  },
+  defaultBreakpoint: 'sm', // customize this for SSR
+});
 Vue.use(VueMaterial);
 Vue.config.productionTip = false;
 

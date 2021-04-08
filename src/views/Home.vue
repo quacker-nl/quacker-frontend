@@ -1,35 +1,34 @@
 <template>
   <div class="home">
     <div class="row">
-      <div class="col-3 nav-col"><Navbar /></div>
-      <div class="col-5 main-col"></div>
-      <div class="col-4 side-col"></div>
+      <div class="col-3 nav-col">
+        <Navbar v-if="!mobile" /><NavbarMobile v-else />
+      </div>
+      <div v-bind:class="{ 'col-9': mobile }" class="col-4 main-col">
+        <Quacks />
+      </div>
+      <div v-if="!mobile" class="col-5 side-col"></div>
     </div>
   </div>
 </template>
 
 <script>
-import QuackService from '@/services/quack.service.js';
-import moment from 'moment';
 import Navbar from '@/components/Navbar.vue';
+import NavbarMobile from '@/components/NavbarMobile.vue';
+import Quacks from '@/components/Quacks.vue';
 
 export default {
   name: 'Home',
-  data() {
-    return {
-      quacks: [],
-    };
-  },
   components: {
     Navbar,
+    NavbarMobile,
+    Quacks,
   },
   methods: {},
-  mounted() {},
-  filters: {
-    formatDate: function(date) {
-      if (date) {
-        return moment(String(date)).fromNow();
-      }
+  computed: {
+    mobile() {
+      const stackedBreakpoints = ['sm', 'md'];
+      return stackedBreakpoints.includes(this.$mq);
     },
   },
 };
