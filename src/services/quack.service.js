@@ -11,7 +11,7 @@ class QuackService {
     return await axios.get(`${ENDPOINT}/${quackId}`);
   }
 
-  async addQuack(quack) {
+  async postQuack(quack) {
     return await axios.post(ENDPOINT, quack);
   }
 }

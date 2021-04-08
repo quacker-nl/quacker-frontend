@@ -15,10 +15,10 @@
       <div class="quack-col">
         <md-field class="quack-textarea">
           <label>What's happening?</label>
-          <md-textarea md-autogrow></md-textarea>
+          <md-textarea v-model="quackMessage" md-autogrow></md-textarea>
         </md-field>
         <md-button
-          @click="showRegistrationDialog = false"
+          @click="postQuack"
           class="quack-button md-dense md-raised md-primary"
           >Quack</md-button
         >
@@ -36,17 +36,62 @@
         </p>
       </div>
     </div>
+    <div></div>
+    <div v-for="quack in quacks" :key="quack.id">
+      <div class="quack-picture-col">
+        <img
+          class="profile-picture"
+          src="https://pv-c.nl/wp-content/uploads/2011/08/person-placeholder.jpg"
+          alt="profile picture"
+        />
+        <h3>{{ currentUser.username }}</h3>
+        <p>{{ quack.createdOn | formatDate }}</p>
+      </div>
+      <div class="quack-col">
+        <p class="quack-message">{{ quack.message }}</p>
+      </div>
+      <hr />
+    </div>
   </div>
 </template>
 
 <script>
+import QuackService from '../services/quack.service';
 import moment from 'moment';
 
 export default {
   data() {
     return {
       quacks: [],
+      quackMessage: null,
     };
+  },
+  methods: {
+    postQuack() {
+      let quack = {
+        message: this.quackMessage,
+      };
+      QuackService.postQuack(quack).then((response) => {
+        console.log(response.data);
+        this.quacks.push(response.data);
+        this.quacks.sort(function(a, b) {
+          return new Date(b.createdOn) - new Date(a.createdOn);
+        });
+      });
+    },
+  },
+  mounted() {
+    QuackService.getQuacks().then((response) => {
+      this.quacks = response.data;
+      this.quacks.sort(function(a, b) {
+        return new Date(b.createdOn) - new Date(a.createdOn);
+      });
+    });
+  },
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
   },
   filters: {
     formatDate: function(date) {
