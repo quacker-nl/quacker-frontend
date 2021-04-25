@@ -2,6 +2,7 @@
   width: 225px;
   display: flex;
   flex-direction: column;
+  position: fixed;
 }
 
 .nav-button {
@@ -155,4 +156,11 @@
     transform: translateY(0%);
     opacity: 1;
   }
+}
+
+.profile {
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  margin-bottom: 24px;
 }

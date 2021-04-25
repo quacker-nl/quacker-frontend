@@ -6,6 +6,7 @@
 .main-col {
   border-left: solid #a7a7a7 1px;
   border-right: solid #a7a7a7 1px;
+  height: 100%;
 }
 
 .side-col {

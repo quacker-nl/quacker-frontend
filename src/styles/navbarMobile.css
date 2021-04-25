@@ -164,3 +164,10 @@
 span {
   font-size: 35px;
 }
+
+.profile {
+  z-index: 1;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 24px;
+}

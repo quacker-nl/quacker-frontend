@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <div>
+    <div style="position: fixed;">
       <div class="logo-container" @click="goTo('')">
         <img class="logo" src="@/assets/logo.png" alt="logo" />
       </div>
@@ -49,7 +49,7 @@
         </li>
       </ul>
     </div>
-    <div v-if="currentUser != null" style="margin-top: auto; z-index: 1;">
+    <div class="profile" v-if="currentUser != null">
       <transition name="appear">
         <div class="profile-card" v-if="toggleProfileCard">
           <div class="profile-card-row">

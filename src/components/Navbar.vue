@@ -49,7 +49,7 @@
         </li>
       </ul>
     </div>
-    <div v-if="currentUser != null" style="margin-top: auto; z-index: 1;">
+    <div class="profile" v-if="currentUser != null">
       <transition name="appear">
         <div class="profile-card" v-if="toggleProfileCard">
           <div class="profile-card-row">
@@ -84,7 +84,7 @@
             <h3 class="display-name">{{ currentUser.username }}</h3>
             <p class="username">@{{ currentUser.username }}</p>
           </div>
-          <span class="material-icons">
+          <span style="margin-left: 75px" class="material-icons">
             more_horiz
           </span>
         </div>
