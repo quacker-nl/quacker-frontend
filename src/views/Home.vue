@@ -1,13 +1,34 @@
 <template>
   <div class="home">
-    <div class="row">
+    <div class="row" v-if="mobile">
       <div class="col-3 nav-col">
-        <Navbar v-if="!mobile" /><NavbarMobile v-else />
+        <NavbarMobile />
       </div>
-      <div v-bind:class="{ 'col-9': mobile }" class="col-4 main-col">
+      <div class="col-13 main-col">
         <Quacks />
       </div>
-      <div v-if="!mobile" class="col-5 side-col"></div>
+    </div>
+    <div class="row" v-else-if="tablet">
+      <div class="col-2 nav-col">
+        <NavbarMobile />
+      </div>
+      <div class="col-9 main-col">
+        <Quacks />
+      </div>
+      <div v-if="!mobile" class="col-5 side-col">
+        <WhoToFollow />
+      </div>
+    </div>
+    <div class="row" v-else>
+      <div class="col-5 nav-col">
+        <Navbar />
+      </div>
+      <div class="col-5 main-col">
+        <Quacks />
+      </div>
+      <div v-if="!mobile" class="col-6 side-col">
+        <WhoToFollow />
+      </div>
     </div>
   </div>
 </template>
@@ -16,6 +37,7 @@
 import Navbar from '@/components/Navbar.vue';
 import NavbarMobile from '@/components/NavbarMobile.vue';
 import Quacks from '@/components/Quacks.vue';
+import WhoToFollow from '@/components/WhoToFollow.vue';
 
 export default {
   name: 'Home',
@@ -23,12 +45,21 @@ export default {
     Navbar,
     NavbarMobile,
     Quacks,
+    WhoToFollow,
   },
   methods: {},
   computed: {
     mobile() {
-      const stackedBreakpoints = ['sm', 'md'];
+      const stackedBreakpoints = ['sm'];
       return stackedBreakpoints.includes(this.$mq);
+    },
+    tablet() {
+      const stackedBreakpoints = ['md'];
+      return stackedBreakpoints.includes(this.$mq);
+    },
+    desktop() {
+      const stackedBreakpoints = ['sm', 'md'];
+      return !stackedBreakpoints.includes(this.$mq);
     },
   },
 };

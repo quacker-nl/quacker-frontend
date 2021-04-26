@@ -84,7 +84,7 @@
             <h3 class="display-name">{{ currentUser.username }}</h3>
             <p class="username">@{{ currentUser.username }}</p>
           </div>
-          <span style="margin-left: 75px" class="material-icons">
+          <span style="margin-left: 40px" class="material-icons">
             more_horiz
           </span>
         </div>

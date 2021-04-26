@@ -30,6 +30,7 @@ p {
 
 textarea {
   font-size: 20px !important;
+  overflow-y: hidden !important;
 }
 
 .break {
