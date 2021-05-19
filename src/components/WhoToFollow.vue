@@ -46,7 +46,8 @@ export default {
   },
   computed: {},
   mounted() {
-    AccountService.getAccounts().then((response) => {
+    FollowService.getUnfollowedUsers().then((response) => {
+      console.log(response);
       this.users = response.data;
     });
   },

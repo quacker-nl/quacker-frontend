@@ -10,6 +10,10 @@ class FollowService {
     };
     return await axios.post(ENDPOINT, request, { headers: authHeader() });
   }
+
+  async getUnfollowedUsers() {
+    return await axios.get(ENDPOINT, { headers: authHeader() });
+  }
 }
 
 export default new FollowService();
