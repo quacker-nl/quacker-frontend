@@ -20,6 +20,11 @@ p {
   width: 90%;
 }
 
+.quack-col p {
+  margin-top: 0px;
+  margin-left: 63px;
+}
+
 .picture-col img {
   width: 48px;
   min-width: 48px;

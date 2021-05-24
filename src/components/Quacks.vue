@@ -36,8 +36,7 @@
         </p>
       </div>
     </div>
-    <div></div>
-    <div v-for="quack in quacks" :key="quack.id">
+    <div class="quack-row" v-for="quack in quacks" :key="quack.id">
       <div class="quack-picture-col">
         <img
           class="profile-picture"
@@ -66,6 +65,7 @@
 
 <script>
 import QuackService from '../services/quack.service';
+import TimelineService from '../services/timeline.service';
 import moment from 'moment';
 
 export default {
@@ -85,11 +85,12 @@ export default {
         this.quacks.sort(function(a, b) {
           return new Date(b.createdOn) - new Date(a.createdOn);
         });
+        this.quackMessage = null;
       });
     },
   },
   mounted() {
-    QuackService.getQuacks().then((response) => {
+    TimelineService.getTimeline().then((response) => {
       this.quacks = response.data;
       this.quacks.sort(function(a, b) {
         return new Date(b.createdOn) - new Date(a.createdOn);

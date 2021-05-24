@@ -117,6 +117,15 @@ export default {
     handleRegistration() {
       this.$store.dispatch('auth/register', this.registration).then(() => {
         this.showRegistrationDialog = false;
+
+        this.registration.username = null;
+        this.registration.email = null;
+        this.registration.password = null;
+        this.registration.birthdate.month = null;
+        this.registration.birthdate.day = null;
+        this.registration.birthdate.year = null;
+        this.registration.username = null;
+        this.registration.username = null;
       });
     },
     daysInMonth(month, year) {

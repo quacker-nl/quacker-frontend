@@ -17,10 +17,19 @@
           style="margin-left: auto;"
           v-if="currentUser.userId == user.userId"
         />
-        <md-button
-          v-else
-          class="edit-profile-button md-dense md-raised md-primary"
-          >Follow</md-button
+        <template v-else>
+          <md-button
+            @click="unfollow(user.userId)"
+            v-if="followed"
+            class="following-button md-dense md-raised md-primary"
+            >Following</md-button
+          >
+          <md-button
+            v-else
+            @click="follow(user.userId)"
+            class="follow-button md-dense md-raised md-primary"
+            >Follow</md-button
+          ></template
         >
       </div>
       <p class="light">@{{ user.username }}</p>
@@ -33,8 +42,8 @@
           <a :href="'https://' + user.website">{{ user.website }}</a>
         </p>
         <span v-if="user.location" class="material-icons light">place</span>
-        <p v-if="user.createdOn">{{ user.location }}</p>
-        <span v-if="user.location" class="material-icons light"
+        <p v-if="user.location" class="light">{{ user.location }}</p>
+        <span v-if="user.createdOn" class="material-icons light"
           >calendar_today</span
         >
         <p v-if="user.createdOn" class="light">
@@ -72,8 +81,7 @@
         >
       </div>
     </div>
-    <div></div>
-    <div v-for="quack in quacks" :key="quack.id">
+    <div class="quack-row" v-for="quack in quacks" :key="quack.id">
       <div class="quack-picture-col">
         <img
           class="profile-picture"
@@ -114,6 +122,7 @@ export default {
       followingCount: 0,
       quacks: [],
       user: null,
+      followed: false,
     };
   },
   components: {
@@ -122,6 +131,16 @@ export default {
   methods: {
     goTo(pathName) {
       this.$router.push({ name: pathName }).catch(() => {});
+    },
+    follow(userId) {
+      FollowService.follow(userId).then((x) => {
+        this.followed = true;
+      });
+    },
+    unfollow(userId) {
+      FollowService.unfollow(userId).then((x) => {
+        this.followed = false;
+      });
     },
   },
   computed: {
@@ -134,6 +153,11 @@ export default {
       (response) => {
         this.followersCount = response.data.followersCount;
         this.followingCount = response.data.followingCount;
+      }
+    );
+    FollowService.checkIfFollowing(this.$route.params.username).then(
+      (response) => {
+        this.followed = response.data;
       }
     );
     QuackService.getQuacksFromUser(this.$route.params.username).then(
