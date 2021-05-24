@@ -14,6 +14,12 @@ class FollowService {
   async getUnfollowedUsers() {
     return await axios.get(ENDPOINT, { headers: authHeader() });
   }
+
+  async getFollowCount(userId) {
+    return await axios.get(ENDPOINT + `/followcount${userId}`, {
+      headers: authHeader(),
+    });
+  }
 }
 
 export default new FollowService();

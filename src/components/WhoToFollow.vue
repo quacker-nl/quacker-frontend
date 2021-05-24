@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import AccountService from '../services/account.service';
 import FollowService from '../services/follow.service';
 
 export default {
@@ -41,7 +40,12 @@ export default {
   },
   methods: {
     follow(userId) {
-      FollowService.follow(userId);
+      FollowService.follow(userId).then((x) => {
+        FollowService.getUnfollowedUsers().then((response) => {
+          console.log(response);
+          this.users = response.data;
+        });
+      });
     },
   },
   computed: {},

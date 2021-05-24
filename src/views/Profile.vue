@@ -5,7 +5,7 @@
         <NavbarMobile />
       </div>
       <div class="col-13 main-col">
-        <Quacks />
+        <Profile />
       </div>
     </div>
     <div class="row" v-else-if="tablet">
@@ -13,7 +13,7 @@
         <NavbarMobile />
       </div>
       <div class="col-9 main-col">
-        <Quacks />
+        <Profile />
       </div>
       <div v-if="!mobile" class="col-5 side-col">
         <WhoToFollow />
@@ -24,7 +24,7 @@
         <Navbar />
       </div>
       <div class="col-5 main-col">
-        <Quacks />
+        <Profile />
       </div>
       <div v-if="!mobile" class="col-6 side-col">
         <WhoToFollow />
@@ -37,7 +37,7 @@
 import Navbar from '@/components/Navbar.vue';
 import NavbarMobile from '@/components/NavbarMobile.vue';
 import WhoToFollow from '@/components/WhoToFollow.vue';
-import Quacks from '@/components/Quacks.vue';
+import Profile from '@/components/ProfileComponent.vue';
 
 export default {
   name: 'Home',
@@ -45,7 +45,7 @@ export default {
     Navbar,
     NavbarMobile,
     WhoToFollow,
-    Quacks,
+    Profile,
   },
   methods: {},
   computed: {

@@ -1,0 +1,33 @@
+.title-container {
+  display: flex;
+  align-items: center;
+  margin-top: -15px;
+}
+
+.back-arrow {
+  color: #40c4ff !important;
+  cursor: pointer;
+  margin-right: 30px;
+}
+
+.profile-container {
+  padding-top: 15px;
+}
+
+.profile-container img {
+  width: 134px;
+  min-width: 134px;
+  height: 134px;
+  min-height: 134px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.name {
+  margin: 0px;
+}
+
+.username {
+  margin: 0px;
+  color: #cccccc;
+}

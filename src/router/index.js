@@ -1,16 +1,31 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '@/views/Home.vue';
+import Quacks from '@/components/Quacks.vue';
 import store from '../store';
 import Login from '@/views/Login.vue';
+import Profile from '@/components/Profile.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
+    alias: '/home',
     name: 'Home',
-    component: Home,
+    component: Quacks,
+    beforeEnter(to, from, next) {
+      const user = store.state.auth.user;
+      if (user) {
+        next();
+      } else {
+        next('/login');
+      }
+    },
+  },
+  {
+    path: '/profile/:username',
+    name: 'Profile',
+    component: Profile,
     beforeEnter(to, from, next) {
       const user = store.state.auth.user;
       if (user) {
@@ -24,6 +39,14 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
+    beforeEnter(to, from, next) {
+      const user = store.state.auth.user;
+      if (user) {
+        next('/home');
+      } else {
+        next();
+      }
+    },
   },
 ];
 
