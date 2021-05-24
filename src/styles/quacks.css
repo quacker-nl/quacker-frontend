@@ -108,3 +108,11 @@ label {
 .quack-picture-col p {
   margin-left: 10px;
 }
+
+.quack-picture-col h3 {
+  cursor: pointer;
+}
+
+.quack-picture-col h3:hover {
+  text-decoration: underline;
+}

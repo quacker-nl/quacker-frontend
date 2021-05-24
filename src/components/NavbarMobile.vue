@@ -1,14 +1,14 @@
 <template>
   <div class="navbar">
     <div style="position: fixed;">
-      <div class="logo-container" @click="goTo('')">
+      <div class="logo-container" @click="goTo('Home')">
         <img class="logo" src="@/assets/logo.png" alt="logo" />
       </div>
       <ul>
         <li>
           <md-button
             class="nav-button md-dense md-raised md-primary"
-            @click="goTo('')"
+            @click="goTo('Home')"
           >
             <span
               :class="{
@@ -21,7 +21,7 @@
         </li>
         <li>
           <md-button
-            @click="goTo('mentions')"
+            @click="goTo('Mentions')"
             class="nav-button md-dense md-raised md-primary"
           >
             <span
@@ -35,7 +35,7 @@
         </li>
         <li>
           <md-button
-            @click="goTo('profile')"
+            @click="goToProfile(currentUser.username)"
             class="nav-button md-dense md-raised md-primary"
           >
             <span
@@ -99,8 +99,13 @@ export default {
     maskBg,
   },
   methods: {
-    goTo(path) {
-      this.$router.push(path).catch(() => {});
+    goTo(pathName) {
+      this.$router.push({ name: pathName }).catch(() => {});
+    },
+    goToProfile(username) {
+      this.$router
+        .push({ name: 'Profile', params: { username: username } })
+        .catch(() => {});
     },
     logOut() {
       this.$store.dispatch('auth/logout').then(() => {

@@ -44,7 +44,16 @@
           src="https://pv-c.nl/wp-content/uploads/2011/08/person-placeholder.jpg"
           alt="profile picture"
         />
-        <h3>{{ currentUser.username }}</h3>
+        <h3
+          @click="
+            $router.push({
+              name: 'Profile',
+              params: { username: quack.username },
+            })
+          "
+        >
+          {{ quack.username }}
+        </h3>
         <p>{{ quack.createdOn | formatDate }}</p>
       </div>
       <div class="quack-col">
@@ -72,7 +81,6 @@ export default {
         message: this.quackMessage,
       };
       QuackService.postQuack(quack).then((response) => {
-        console.log(response.data);
         this.quacks.push(response.data);
         this.quacks.sort(function(a, b) {
           return new Date(b.createdOn) - new Date(a.createdOn);

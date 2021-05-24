@@ -15,8 +15,8 @@ class FollowService {
     return await axios.get(ENDPOINT, { headers: authHeader() });
   }
 
-  async getFollowCount(userId) {
-    return await axios.get(ENDPOINT + `/followcount${userId}`, {
+  async getFollowCount(username) {
+    return await axios.get(ENDPOINT + `/followcount/${username}`, {
       headers: authHeader(),
     });
   }

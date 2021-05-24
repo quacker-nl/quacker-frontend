@@ -69,3 +69,11 @@ img {
   background: none !important;
   border: 1px solid #40c4ff;
 }
+
+.username-container h3 {
+  cursor: pointer;
+}
+
+.username-container h3:hover {
+  text-decoration: underline;
+}

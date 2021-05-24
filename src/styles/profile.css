@@ -12,6 +12,7 @@
 
 .profile-container {
   padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .profile-container img {
@@ -27,7 +28,104 @@
   margin: 0px;
 }
 
-.username {
+.light {
   margin: 0px;
   color: #cccccc;
+}
+
+.light b {
+  color: white;
+}
+
+.followcount {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.followcount p {
+  margin-right: 20px;
+}
+
+.empty {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+}
+
+.empty h2 {
+  margin-top: 0px;
+  margin-bottom: 12px;
+}
+
+.empty p {
+  color: #cccccc;
+}
+
+.quack-picture-col img {
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+  min-height: 48px;
+  border-radius: 50%;
+}
+
+.quack-picture-col {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.quack-picture-col h3 {
+  margin-left: 15px;
+}
+
+.quack-picture-col p {
+  margin-left: 10px;
+}
+
+.attributes {
+  display: flex;
+  align-items: center;
+}
+
+.attributes p {
+  margin-right: 15px;
+}
+
+.attributes span {
+  margin-right: 5px;
+}
+
+.quack-button {
+  text-transform: none;
+  border-radius: 2.5em;
+  color: white !important;
+  font-size: 15px !important;
+}
+
+.quack-picture-col h3 {
+  cursor: pointer;
+}
+
+.quack-picture-col h3:hover {
+  text-decoration: underline;
+}
+
+.edit-container {
+  display: flex;
+  align-items: center;
+}
+
+.edit-profile-button {
+  display: flex;
+  margin-left: auto;
+  text-transform: none;
+  border-radius: 2.5em;
+  color: #40c4ff !important;
+  background: none !important;
+  border: 1px solid #40c4ff;
 }

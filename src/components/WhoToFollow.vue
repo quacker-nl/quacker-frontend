@@ -13,7 +13,17 @@
             alt="profile picture"
           />
           <div class="username-container">
-            <h3 class="display-name">{{ user.username }}</h3>
+            <h3
+              @click="
+                $router.push({
+                  name: 'Profile',
+                  params: { username: user.username },
+                })
+              "
+              class="display-name"
+            >
+              {{ user.username }}
+            </h3>
             <p class="username">@{{ user.username }}</p>
           </div>
           <md-button
@@ -42,7 +52,6 @@ export default {
     follow(userId) {
       FollowService.follow(userId).then((x) => {
         FollowService.getUnfollowedUsers().then((response) => {
-          console.log(response);
           this.users = response.data;
         });
       });
@@ -51,7 +60,6 @@ export default {
   computed: {},
   mounted() {
     FollowService.getUnfollowedUsers().then((response) => {
-      console.log(response);
       this.users = response.data;
     });
   },

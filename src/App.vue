@@ -6,7 +6,7 @@
           <NavbarMobile />
         </div>
         <div class="col-13 main-col">
-          <router-view />
+          <router-view :key="$route.path" />
         </div>
       </div>
       <div class="row" v-else-if="tablet">
@@ -14,7 +14,7 @@
           <NavbarMobile />
         </div>
         <div class="col-9 main-col">
-          <router-view />
+          <router-view :key="$route.path" />
         </div>
         <div v-if="!mobile" class="col-5 side-col">
           <WhoToFollow />
@@ -25,7 +25,7 @@
           <Navbar />
         </div>
         <div class="col-5 main-col">
-          <router-view />
+          <router-view :key="$route.path" />
         </div>
         <div v-if="!mobile" class="col-6 side-col">
           <WhoToFollow />
