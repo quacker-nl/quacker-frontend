@@ -55,8 +55,26 @@
         </h3>
         <p>{{ quack.createdOn | formatDate }}</p>
       </div>
-      <div class="quack-col">
-        <p class="quack-message">{{ quack.message }}</p>
+      <div class="quacked-col">
+        <template v-for="(word, index) in quack.message.split(/[ ,]+/)"
+          ><span
+            :key="index"
+            v-if="word[0] == '@' && word.length > 1"
+            class="mention"
+            @click="
+              $router.push({
+                name: 'Profile',
+                params: { username: word.substring(1) },
+              })
+            "
+            >{{ word }} </span
+          ><span
+            :key="index"
+            v-else-if="word[0] == '#' && word.length > 1"
+            class="topic"
+            >{{ word }} </span
+          ><span :key="index" v-else>{{ word }} </span></template
+        >
       </div>
       <hr />
     </div>

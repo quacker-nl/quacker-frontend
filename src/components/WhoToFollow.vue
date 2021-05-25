@@ -35,17 +35,36 @@
       </div>
       <div class="follow-footer"></div>
     </div>
+
+    <div class="trends-container">
+      <div class="follow-header">
+        <h2>Trends</h2>
+      </div>
+
+      <div class="follow-body">
+        <div v-for="trend in trends" :key="trend.id" class="user-row">
+          <div class="username-container">
+            <h3 class="display-name">
+              {{ trend }}
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="follow-footer"></div>
+    </div>
   </div>
 </template>
 
 <script>
 import FollowService from '../services/follow.service';
+import QuackService from '../services/quack.service';
 
 export default {
   name: 'Navbar',
   data() {
     return {
       users: [],
+      trends: [],
     };
   },
   methods: {
@@ -61,6 +80,9 @@ export default {
   mounted() {
     FollowService.getUnfollowedUsers().then((response) => {
       this.users = response.data;
+    });
+    QuackService.getTrends().then((response) => {
+      this.trends = response.data;
     });
   },
 };

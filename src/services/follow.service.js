@@ -30,6 +30,18 @@ class FollowService {
     });
   }
 
+  async getFollowers(username) {
+    return await axios.get(`/followers/${username}`, {
+      headers: authHeader(),
+    });
+  }
+
+  async getFollowing(username) {
+    return await axios.get(`/following/${username}`, {
+      headers: authHeader(),
+    });
+  }
+
   async checkIfFollowing(username) {
     return await axios.get(ENDPOINT + `/isfollowing/${username}`, {
       headers: authHeader(),

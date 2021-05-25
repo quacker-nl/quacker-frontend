@@ -21,20 +21,6 @@
         </li>
         <li>
           <md-button
-            @click="goTo('Mentions')"
-            class="nav-button md-dense md-raised md-primary"
-          >
-            <span
-              :class="{
-                active: this.$route.name == 'Mentions',
-              }"
-              class="material-icons"
-              >notifications</span
-            ></md-button
-          >
-        </li>
-        <li>
-          <md-button
             @click="goToProfile(currentUser.username)"
             class="nav-button md-dense md-raised md-primary"
           >
