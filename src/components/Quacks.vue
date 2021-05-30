@@ -13,18 +13,28 @@
           @error="replaceByDefault"
         />
       </div>
-      <div class="quack-col">
+      <div class="quack-col ">
         <md-field class="quack-textarea">
           <label>What's happening?</label>
-          <md-textarea v-model="quackMessage" md-autogrow></md-textarea>
+          <md-textarea
+            :disabled="quackLoading"
+            v-model="quackMessage"
+            md-autogrow
+          ></md-textarea>
         </md-field>
         <md-button
+          :disabled="quackLoading"
           @click="postQuack"
           class="quack-button md-dense md-raised md-primary"
           >Quack</md-button
         >
       </div>
     </div>
+    <md-progress-bar
+      v-if="quackLoading"
+      class="quack-loading-bar"
+      md-mode="indeterminate"
+    ></md-progress-bar>
     <hr />
     <div class="break"></div>
     <hr />
@@ -93,21 +103,29 @@ export default {
     return {
       quacks: [],
       quackMessage: null,
+      quackLoading: false,
     };
   },
   methods: {
     postQuack() {
+      this.quackLoading = true;
       let quack = {
         message: this.quackMessage,
       };
-      QuackService.postQuack(quack).then((response) => {
-        this.quacks.push(response.data);
-        this.quacks.sort(function(a, b) {
-          return new Date(b.createdOn) - new Date(a.createdOn);
-        });
+      QuackService.postQuack(quack)
+        .then((response) => {
+          this.quacks.push(response.data);
+          this.quacks.sort(function(a, b) {
+            return new Date(b.createdOn) - new Date(a.createdOn);
+          });
 
-        this.quackMessage = null;
-      });
+          this.quackMessage = null;
+          this.quackLoading = false;
+        })
+        .catch((error) => {
+          this.quackMessage = null;
+          this.quackLoading = false;
+        });
     },
     replaceByDefault(e) {
       e.target.src =
