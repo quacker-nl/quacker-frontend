@@ -10,6 +10,13 @@
       <hr />
       <div class="profile-container">
         <img
+          v-if="user.profilePictureURL"
+          class="profile-picture"
+          :src="user.profilePictureURL"
+          alt="profile picture"
+        />
+        <img
+          v-else
           class="profile-picture"
           src="https://pv-c.nl/wp-content/uploads/2011/08/person-placeholder.jpg"
           alt="profile picture"
@@ -103,6 +110,13 @@
       <div class="quack-row" v-for="quack in quacks" :key="quack.id">
         <div class="quack-picture-col">
           <img
+            v-if="user.profilePictureURL"
+            class="profile-picture"
+            :src="user.profilePictureURL"
+            alt="profile picture"
+          />
+          <img
+            v-else
             class="profile-picture"
             src="https://pv-c.nl/wp-content/uploads/2011/08/person-placeholder.jpg"
             alt="profile picture"

@@ -13,78 +13,128 @@
       <md-dialog-title>Create your account</md-dialog-title>
 
       <md-dialog-content>
-        <md-field>
-          <label>Username</label>
-          <md-input v-model="registration.username"></md-input>
-        </md-field>
-        <md-field>
-          <label>Email</label>
-          <md-input v-model="registration.email"></md-input>
-        </md-field>
-        <md-field>
-          <label>Password</label>
-          <md-input type="password" v-model="registration.password"></md-input>
-        </md-field>
-        <div class="md-layout md-gutter">
-          <div class="md-layout-item">
-            <md-field>
-              <label for="month">Month</label>
-              <md-select
-                v-model="registration.birthdate.month"
+        <ValidationObserver ref="form">
+          <ValidationProvider
+            name="username"
+            rules="required"
+            v-slot="{ errors }"
+          >
+            <md-field :class="{ 'md-invalid': errors.length > 0 }">
+              <label>Username</label>
+              <md-input v-model="registration.username"></md-input>
+              <span class="md-error">{{ errors[0] }}</span>
+            </md-field>
+          </ValidationProvider>
+          <ValidationProvider
+            name="email"
+            rules="email|required"
+            v-slot="{ errors }"
+          >
+            <md-field :class="{ 'md-invalid': errors.length > 0 }">
+              <label>Email</label>
+              <md-input v-model="registration.email"></md-input>
+              <span class="md-error">{{ errors[0] }}</span>
+            </md-field>
+          </ValidationProvider>
+          <ValidationProvider
+            name="password"
+            rules="required|min:3|containLetters|containNumbers"
+            v-slot="{ errors }"
+          >
+            <md-field :class="{ 'md-invalid': errors.length > 0 }">
+              <label>Password</label>
+              <md-input
+                type="password"
+                v-model="registration.password"
+              ></md-input>
+              <span class="md-error">{{ errors[0] }}</span>
+            </md-field>
+          </ValidationProvider>
+          <div class="md-layout md-gutter">
+            <div class="md-layout-item">
+              <ValidationProvider
                 name="month"
-                id="month"
+                rules="required"
+                v-slot="{ errors }"
               >
-                <md-option value="1">january</md-option>
-                <md-option value="2">february</md-option>
-                <md-option value="3">march</md-option>
-                <md-option value="4">april</md-option>
-                <md-option value="5">may</md-option>
-                <md-option value="6">june</md-option>
-                <md-option value="7">july</md-option>
-                <md-option value="8">august</md-option>
-                <md-option value="9">september</md-option>
-                <md-option value="10">october</md-option>
-                <md-option value="11">november</md-option>
-                <md-option value="12">december</md-option>
-              </md-select>
-            </md-field>
-          </div>
+                <md-field :class="{ 'md-invalid': errors.length > 0 }">
+                  <label for="month">Month</label>
+                  <md-select
+                    v-model="registration.birthdate.month"
+                    name="month"
+                    id="month"
+                  >
+                    <md-option value="1">january</md-option>
+                    <md-option value="2">february</md-option>
+                    <md-option value="3">march</md-option>
+                    <md-option value="4">april</md-option>
+                    <md-option value="5">may</md-option>
+                    <md-option value="6">june</md-option>
+                    <md-option value="7">july</md-option>
+                    <md-option value="8">august</md-option>
+                    <md-option value="9">september</md-option>
+                    <md-option value="10">october</md-option>
+                    <md-option value="11">november</md-option>
+                    <md-option value="12">december</md-option>
+                  </md-select>
+                  <span class="md-error">{{ errors[0] }}</span>
+                </md-field>
+              </ValidationProvider>
+            </div>
 
-          <div class="md-layout-item">
-            <md-field>
-              <label for="day">Day</label>
-              <md-select
-                v-model="registration.birthdate.day"
+            <div class="md-layout-item">
+              <ValidationProvider
                 name="day"
-                id="day"
+                rules="required"
+                v-slot="{ errors }"
               >
-                <md-option v-for="day in days" :value="day" :key="day">{{
-                  day
-                }}</md-option>
-              </md-select>
-            </md-field>
-          </div>
+                <md-field :class="{ 'md-invalid': errors.length > 0 }">
+                  <label for="day">Day</label>
+                  <md-select
+                    v-model="registration.birthdate.day"
+                    name="day"
+                    id="day"
+                  >
+                    <md-option v-for="day in days" :value="day" :key="day">{{
+                      day
+                    }}</md-option>
+                  </md-select>
+                  <span class="md-error">{{ errors[0] }}</span>
+                </md-field>
+              </ValidationProvider>
+            </div>
 
-          <div class="md-layout-item">
-            <md-field>
-              <label for="year">Year</label>
-              <md-select
-                v-model="registration.birthdate.year"
+            <div class="md-layout-item">
+              <ValidationProvider
                 name="year"
-                id="year"
+                rules="required"
+                v-slot="{ errors }"
               >
-                <md-option v-for="year in years" :value="year" :key="year">{{
-                  year
-                }}</md-option>
-              </md-select>
-            </md-field>
+                <md-field :class="{ 'md-invalid': errors.length > 0 }">
+                  <label for="year">Year</label>
+                  <md-select
+                    v-model="registration.birthdate.year"
+                    name="year"
+                    id="year"
+                  >
+                    <md-option
+                      v-for="year in years"
+                      :value="year"
+                      :key="year"
+                      >{{ year }}</md-option
+                    >
+                  </md-select>
+                  <span class="md-error">{{ errors[0] }}</span>
+                </md-field>
+              </ValidationProvider>
+            </div>
           </div>
-        </div>
-        <md-button
-          @click="handleRegistration"
-          class="signup-button md-raised md-primary"
-          >Sign up</md-button
-        >
+          <md-button
+            @click="handleRegistration"
+            class="signup-button md-raised md-primary"
+            >Sign up</md-button
+          >
+        </ValidationObserver>
       </md-dialog-content>
 
       <md-dialog-actions></md-dialog-actions>
@@ -97,6 +147,8 @@
 </template>
 
 <script>
+import Validation from '../services/validation.js';
+
 export default {
   data() {
     return {

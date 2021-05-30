@@ -8,8 +8,9 @@
       <div class="picture-col">
         <img
           class="profile-picture"
-          src="https://pv-c.nl/wp-content/uploads/2011/08/person-placeholder.jpg"
+          :src="S3 + currentUser.username"
           alt="profile picture"
+          @error="replaceByDefault"
         />
       </div>
       <div class="quack-col">
@@ -40,8 +41,9 @@
       <div class="quack-picture-col">
         <img
           class="profile-picture"
-          src="https://pv-c.nl/wp-content/uploads/2011/08/person-placeholder.jpg"
+          :src="S3 + quack.username"
           alt="profile picture"
+          @error="replaceByDefault"
         />
         <h3
           @click="
@@ -103,8 +105,13 @@ export default {
         this.quacks.sort(function(a, b) {
           return new Date(b.createdOn) - new Date(a.createdOn);
         });
+
         this.quackMessage = null;
       });
+    },
+    replaceByDefault(e) {
+      e.target.src =
+        'https://pv-c.nl/wp-content/uploads/2011/08/person-placeholder.jpg';
     },
   },
   mounted() {
@@ -118,6 +125,9 @@ export default {
   computed: {
     currentUser() {
       return this.$store.state.auth.user;
+    },
+    S3() {
+      return process.env.VUE_APP_S3;
     },
   },
   filters: {

@@ -14,9 +14,17 @@ class AccountService {
     });
   }
 
-  async updateAccount(userId, editProfileRequest) {
-    return await axios.put(`${ENDPOINT}/${userId}`, editProfileRequest, {
-      headers: authHeader(),
+  async updateAccount(userId, editProfileRequest, profilePicture) {
+    var formData = new FormData();
+
+    formData.append('profilePicture', profilePicture);
+    formData.append('profile', JSON.stringify(editProfileRequest));
+
+    return await axios.put(`${ENDPOINT}/${userId}`, formData, {
+      headers: {
+        Authorization: authHeader(true),
+        'Content-Type': 'multipart/form-data',
+      },
     });
   }
 }

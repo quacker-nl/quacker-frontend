@@ -24,8 +24,9 @@
       <div class="quack-picture-col">
         <img
           class="profile-picture"
-          src="https://pv-c.nl/wp-content/uploads/2011/08/person-placeholder.jpg"
+          :src="S3 + user.username"
           alt="profile picture"
+          @error="replaceByDefault"
         />
         <h3
           @click="
@@ -58,10 +59,17 @@ export default {
     goTo(pathName) {
       this.$router.push({ name: pathName }).catch(() => {});
     },
+    replaceByDefault(e) {
+      e.target.src =
+        'https://pv-c.nl/wp-content/uploads/2011/08/person-placeholder.jpg';
+    },
   },
   computed: {
     currentUser() {
       return this.$store.state.auth.user;
+    },
+    S3() {
+      return process.env.VUE_APP_S3;
     },
   },
   mounted() {

@@ -9,8 +9,9 @@
         <div v-for="user in users" :key="user.userId" class="user-row">
           <img
             class="profile-picture"
-            src="https://pv-c.nl/wp-content/uploads/2011/08/person-placeholder.jpg"
+            :src="S3 + user.username"
             alt="profile picture"
+            @error="replaceByDefault"
           />
           <div class="username-container">
             <h3
@@ -75,8 +76,16 @@ export default {
         });
       });
     },
+    replaceByDefault(e) {
+      e.target.src =
+        'https://pv-c.nl/wp-content/uploads/2011/08/person-placeholder.jpg';
+    },
   },
-  computed: {},
+  computed: {
+    S3() {
+      return process.env.VUE_APP_S3;
+    },
+  },
   mounted() {
     FollowService.getUnfollowedUsers().then((response) => {
       this.users = response.data;

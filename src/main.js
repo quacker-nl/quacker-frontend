@@ -5,6 +5,11 @@ import store from './store';
 import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.min.css';
 import VueMq from 'vue-mq';
+import {
+  setInteractionMode,
+  ValidationProvider,
+  ValidationObserver,
+} from 'vee-validate';
 
 Vue.use(VueMq, {
   breakpoints: {
@@ -16,6 +21,10 @@ Vue.use(VueMq, {
   defaultBreakpoint: 'sm', // customize this for SSR
 });
 Vue.use(VueMaterial);
+
+Vue.component('ValidationProvider', ValidationProvider);
+Vue.component('ValidationObserver', ValidationObserver);
+
 Vue.config.productionTip = false;
 
 Vue.config.errorHandler = (err, vm, info) => {

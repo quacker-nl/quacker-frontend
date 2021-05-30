@@ -41,8 +41,9 @@
           <div class="profile-card-row">
             <img
               class="profile-picture"
-              src="https://pv-c.nl/wp-content/uploads/2011/08/person-placeholder.jpg"
+              :src="S3 + currentUser.username"
               alt="profile picture"
+              @error="replaceByDefault"
             />
           </div>
           <hr />
@@ -62,8 +63,9 @@
         <div class="profile-container">
           <img
             class="profile-picture"
-            src="https://pv-c.nl/wp-content/uploads/2011/08/person-placeholder.jpg"
+            :src="S3 + currentUser.username"
             alt="profile picture"
+            @error="replaceByDefault"
           />
         </div>
       </button>
@@ -98,10 +100,17 @@ export default {
         this.$router.push('/login');
       });
     },
+    replaceByDefault(e) {
+      e.target.src =
+        'https://pv-c.nl/wp-content/uploads/2011/08/person-placeholder.jpg';
+    },
   },
   computed: {
     currentUser() {
       return this.$store.state.auth.user;
+    },
+    S3() {
+      return process.env.VUE_APP_S3;
     },
   },
 };
