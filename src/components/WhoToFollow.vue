@@ -6,7 +6,10 @@
       </div>
 
       <div class="follow-body">
-        <div v-for="user in users" :key="user.userId" class="user-row">
+        <div class="loading-container" v-if="!usersLoaded">
+          <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
+        </div>
+        <div v-else v-for="user in users" :key="user.userId" class="user-row">
           <img
             class="profile-picture"
             :src="S3 + user.username"
@@ -34,6 +37,7 @@
           >
         </div>
       </div>
+
       <div class="follow-footer"></div>
     </div>
 
@@ -43,7 +47,10 @@
       </div>
 
       <div class="follow-body">
-        <div v-for="trend in trends" :key="trend.id" class="user-row">
+        <div class="loading-container" v-if="!usersLoaded">
+          <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
+        </div>
+        <div v-else v-for="trend in trends" :key="trend.id" class="user-row">
           <div class="username-container">
             <h3 class="display-name">
               {{ trend }}
@@ -66,6 +73,8 @@ export default {
     return {
       users: [],
       trends: [],
+      usersLoaded: false,
+      trendsLoaded: false,
     };
   },
   methods: {
@@ -89,9 +98,11 @@ export default {
   mounted() {
     FollowService.getUnfollowedUsers().then((response) => {
       this.users = response.data;
+      this.usersLoaded = true;
     });
     QuackService.getTrends().then((response) => {
       this.trends = response.data;
+      this.trendsLoaded = true;
     });
   },
 };

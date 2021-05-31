@@ -40,11 +40,17 @@
     <hr />
     <div class="quacks">
       <div class="empty" v-if="quacks.length == 0">
-        <h2>Welcome to Quacker</h2>
-        <p>
-          This is the best place to see what’s happening in your world. Find
-          some people and topics to follow now.
-        </p>
+        <template v-if="timelineLoaded">
+          <h2>Welcome to Quacker</h2>
+          <p>
+            This is the best place to see what’s happening in your world. Find
+            some people and topics to follow now.
+          </p>
+        </template>
+        <md-progress-spinner
+          v-else
+          md-mode="indeterminate"
+        ></md-progress-spinner>
       </div>
     </div>
     <div class="quack-row" v-for="quack in quacks" :key="quack.id">
@@ -104,6 +110,7 @@ export default {
       quacks: [],
       quackMessage: null,
       quackLoading: false,
+      timelineLoaded: false,
     };
   },
   methods: {
@@ -133,12 +140,17 @@ export default {
     },
   },
   mounted() {
-    TimelineService.getTimeline().then((response) => {
-      this.quacks = response.data;
-      this.quacks.sort(function(a, b) {
-        return new Date(b.createdOn) - new Date(a.createdOn);
+    TimelineService.getTimeline()
+      .then((response) => {
+        this.quacks = response.data;
+        this.quacks.sort(function(a, b) {
+          return new Date(b.createdOn) - new Date(a.createdOn);
+        });
+        this.timelineLoaded = true;
+      })
+      .catch((error) => {
+        this.timelineLoaded = false;
       });
-    });
   },
   computed: {
     currentUser() {

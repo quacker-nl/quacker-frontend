@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="user != null">
+    <div v-if="user != null && profileLoaded">
       <div class="title-container">
         <span @click="goTo('Home')" class="material-icons back-arrow"
           >west</span
@@ -157,9 +157,12 @@
         <hr />
       </div>
     </div>
-    <div class="notfound" v-if="notFound">
+    <div class="notfound" v-else-if="notFound">
       <h1>404</h1>
       <h2>This profile doesn't exist</h2>
+    </div>
+    <div class="loading-container" v-else>
+      <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
     </div>
   </div>
 </template>
@@ -180,6 +183,7 @@ export default {
       user: null,
       followed: false,
       notFound: false,
+      profileLoaded: false,
     };
   },
   components: {
@@ -206,6 +210,7 @@ export default {
     },
   },
   mounted() {
+    this.profileLoaded = false;
     FollowService.getFollowCount(this.$route.params.username).then(
       (response) => {
         this.followersCount = response.data.followersCount;
@@ -217,19 +222,24 @@ export default {
         this.followed = response.data;
       }
     );
-    QuackService.getQuacksFromUser(this.$route.params.username).then(
-      (response) => {
+    QuackService.getQuacksFromUser(this.$route.params.username)
+      .then((response) => {
         this.quacks = response.data;
         this.quacks.sort(function(a, b) {
           return new Date(b.createdOn) - new Date(a.createdOn);
         });
-      }
-    );
+        this.profileLoaded = true;
+      })
+      .catch((error) => {
+        this.profileLoaded = false;
+      });
     AccountService.getAccount(this.$route.params.username)
       .then((response) => {
         this.user = response.data;
+        this.profileLoaded = true;
       })
       .catch((error) => {
+        this.profileLoaded = false;
         if (error.response.status == '404') {
           this.notFound = true;
         }
