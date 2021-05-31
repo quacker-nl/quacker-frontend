@@ -100,11 +100,6 @@
           <p v-else>
             When they post quacks, they will show up here.
           </p>
-          <md-button
-            @click="goTo('Home')"
-            class="quack-button md-dense md-raised md-primary"
-            >Quack something</md-button
-          >
         </div>
       </div>
       <div class="quack-row" v-for="quack in quacks" :key="quack.id">
