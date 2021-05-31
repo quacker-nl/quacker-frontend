@@ -9,7 +9,6 @@ spec:
     - hosts:
         - quacker.nl
         - www.quacker.nl
-      secretName: testsecret-tls
   rules:
     - host: 'quacker.nl'
       http:
