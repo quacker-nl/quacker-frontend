@@ -38,6 +38,8 @@ Vue.config.errorHandler = (err, vm, info) => {
 
 document.title = process.env.VUE_APP_TITLE;
 
+Vue.prototype.$errorMessage = 'My App';
+
 new Vue({
   router,
   store,

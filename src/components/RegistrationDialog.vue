@@ -135,6 +135,9 @@
             >Sign up</md-button
           >
         </ValidationObserver>
+        <div v-if="errorMessage" class="error-container">
+          <p>{{ errorMessage }}</p>
+        </div>
       </md-dialog-content>
 
       <md-dialog-actions></md-dialog-actions>
@@ -152,6 +155,7 @@ import Validation from '../services/validation.js';
 export default {
   data() {
     return {
+      errorMessage: null,
       showRegistrationDialog: false,
       registration: {
         username: null,
@@ -167,18 +171,34 @@ export default {
   },
   methods: {
     handleRegistration() {
-      this.$store.dispatch('auth/register', this.registration).then(() => {
-        this.showRegistrationDialog = false;
+      this.$store
+        .dispatch('auth/register', this.registration)
+        .then(() => {
+          this.showRegistrationDialog = false;
 
-        this.registration.username = null;
-        this.registration.email = null;
-        this.registration.password = null;
-        this.registration.birthdate.month = null;
-        this.registration.birthdate.day = null;
-        this.registration.birthdate.year = null;
-        this.registration.username = null;
-        this.registration.username = null;
-      });
+          this.registration.username = null;
+          this.registration.email = null;
+          this.registration.password = null;
+          this.registration.birthdate.month = null;
+          this.registration.birthdate.day = null;
+          this.registration.birthdate.year = null;
+          this.registration.username = null;
+          this.registration.username = null;
+        })
+        .catch((error) => {
+          if (!error.response) {
+            // network error
+            this.errorMessage =
+              'Network Error: the server could not be reached';
+          } else if (error.response.status === 502) {
+            this.errorMessage =
+              'Gateway error: the service could not be reached';
+          } else if (error.response.status === 400) {
+            this.errorMessage = error.response.data.title;
+          } else {
+            this.errorMessage = 'Something went wrong';
+          }
+        });
     },
     daysInMonth(month, year) {
       if (month == null) {

@@ -217,17 +217,15 @@ export default {
         this.followed = response.data;
       }
     );
-    QuackService.getQuacksFromUser(this.$route.params.username)
-      .then((response) => {
+    QuackService.getQuacksFromUser(this.$route.params.username).then(
+      (response) => {
         this.quacks = response.data;
         this.quacks.sort(function(a, b) {
           return new Date(b.createdOn) - new Date(a.createdOn);
         });
-        this.profileLoaded = true;
-      })
-      .catch((error) => {
-        this.profileLoaded = false;
-      });
+      }
+    );
+
     AccountService.getAccount(this.$route.params.username)
       .then((response) => {
         this.user = response.data;

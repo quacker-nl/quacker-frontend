@@ -7,7 +7,7 @@
       accent: md-get-palette-color(blue, A200),
     // The accent or secondary color
       theme: dark
-      // This can be dark or light,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+      // This can be dark or light,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
   )
 );
 @import '~vue-material/dist/theme/all';
@@ -191,4 +191,15 @@ hr {
 .error {
   font-weight: bold;
   color: #ff0033;
+}
+
+.error-container {
+  background-color: rgb(255, 210, 218);
+  color: rgb(15, 20, 25);
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 12px;
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

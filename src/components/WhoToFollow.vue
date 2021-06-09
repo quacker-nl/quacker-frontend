@@ -47,7 +47,7 @@
       </div>
 
       <div class="follow-body">
-        <div class="loading-container" v-if="!usersLoaded">
+        <div class="loading-container" v-if="!trendsLoaded">
           <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
         </div>
         <div v-else v-for="trend in trends" :key="trend.id" class="user-row">

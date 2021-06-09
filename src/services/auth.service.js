@@ -29,7 +29,8 @@ class AuthService {
       password: user.password,
       email: user.email,
       birthdate: moment(
-        `${user.birthdate.day}-${user.birthdate.month}-${user.birthdate.year}`
+        `${user.birthdate.day}-${user.birthdate.month}-${user.birthdate.year}`,
+        'DD-MM-YYYY'
       ).toDate(),
     });
   }
