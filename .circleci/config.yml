@@ -127,7 +127,7 @@ workflows:
             - quacker
       - cypress/run:
           requires:
-            - build
+            - stage
           store_artifacts: true
       - acceptance testing:
           type: approval
