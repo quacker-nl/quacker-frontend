@@ -112,11 +112,6 @@ orbs:
 
 workflows:
   version: 2
-  build:
-    jobs:
-      - cypress/run:
-          record: true
-          store_artifacts: true
   build-master:
     jobs:
       - build:
@@ -130,7 +125,10 @@ workflows:
             - build
           context:
             - quacker
-
+      - cypress/run:
+          requires:
+            - build
+          store_artifacts: true
       - acceptance testing:
           type: approval
           requires:
