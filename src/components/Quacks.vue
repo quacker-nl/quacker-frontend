@@ -17,6 +17,7 @@
         <md-field class="quack-textarea">
           <label>What's happening?</label>
           <md-textarea
+            id="quack-textarea"
             :disabled="quackLoading"
             v-model="quackMessage"
             md-autogrow
@@ -25,6 +26,7 @@
         <md-button
           :disabled="quackLoading"
           @click="postQuack"
+          id="quack-button"
           class="quack-button md-dense md-raised md-primary"
           >Quack</md-button
         >

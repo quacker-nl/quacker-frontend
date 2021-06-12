@@ -105,8 +105,11 @@ jobs:
             kubectl apply -f k8s/production/quacker-frontend-service.yml 
             kubectl apply -f k8s/production/quacker-frontend-ingress.yml
             kubectl rollout restart deployment/quacker-frontend
+
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.0
+  cypress: cypress-io/cypress@1
+
 workflows:
   version: 2
   build-master:
@@ -122,6 +125,13 @@ workflows:
             - build
           context:
             - quacker
+      - e2e:
+          requires:
+            - stage
+          jobs:
+            - cypress/run:
+                record: true
+                store_artifacts: true
       - acceptance testing:
           type: approval
           requires:

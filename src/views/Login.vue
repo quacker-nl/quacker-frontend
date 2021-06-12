@@ -11,13 +11,18 @@
       <div class="login-body">
         <md-field>
           <label>Email or username</label>
-          <md-input v-model="user.username"></md-input>
+          <md-input id="username-input" v-model="user.username"></md-input>
         </md-field>
         <md-field>
           <label>Password</label>
-          <md-input v-model="user.password" type="password"></md-input>
+          <md-input
+            id="password-input"
+            v-model="user.password"
+            type="password"
+          ></md-input>
         </md-field>
         <md-button
+          id="login-button"
           :disabled="validLogin"
           @click="handleLogin"
           class="login-button md-raised md-primary"
