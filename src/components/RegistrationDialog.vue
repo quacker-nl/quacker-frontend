@@ -11,8 +11,10 @@
       </div>
 
       <md-dialog-title>Create your account</md-dialog-title>
-
       <md-dialog-content>
+        <div v-if="errorMessage" class="error-container">
+          <p>{{ errorMessage }}</p>
+        </div>
         <ValidationObserver ref="form">
           <ValidationProvider
             name="username"
@@ -130,14 +132,12 @@
             </div>
           </div>
           <md-button
+            :disabled="!validRegistration"
             @click="handleRegistration"
             class="signup-button md-raised md-primary"
             >Sign up</md-button
           >
         </ValidationObserver>
-        <div v-if="errorMessage" class="error-container">
-          <p>{{ errorMessage }}</p>
-        </div>
       </md-dialog-content>
 
       <md-dialog-actions></md-dialog-actions>
@@ -194,7 +194,7 @@ export default {
             this.errorMessage =
               'Gateway error: the service could not be reached';
           } else if (error.response.status === 400) {
-            this.errorMessage = error.response.data.title;
+            this.errorMessage = error.response.data.Errors[0];
           } else {
             this.errorMessage = 'Something went wrong';
           }
@@ -211,6 +211,24 @@ export default {
     },
   },
   computed: {
+    validRegistration() {
+      if (
+        this.registration.username &&
+        this.registration.email &&
+        this.registration.password &&
+        this.registration.birthdate.month &&
+        this.registration.birthdate.year &&
+        this.registration.birthdate.day
+      ) {
+        if (this.$refs.form) {
+          if (this.$refs.form.flags.invalid) {
+            return false;
+          }
+        }
+        return true;
+      }
+      return false;
+    },
     days() {
       return Array.from(
         {

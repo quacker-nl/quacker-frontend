@@ -18,6 +18,7 @@
           <md-input v-model="user.password" type="password"></md-input>
         </md-field>
         <md-button
+          :disabled="validLogin"
           @click="handleLogin"
           class="login-button md-raised md-primary"
           >Log in</md-button
@@ -66,6 +67,14 @@ export default {
             this.errorMessage = 'Something went wrong';
           }
         });
+    },
+  },
+  computed: {
+    validLogin() {
+      if (this.user.username && this.user.password) {
+        return false;
+      }
+      return true;
     },
   },
   components: {
