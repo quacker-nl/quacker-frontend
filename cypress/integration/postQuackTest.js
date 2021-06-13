@@ -13,7 +13,7 @@ describe('Posting quacks', () => {
 
     var message = faker.random.words();
 
-    cy.get('textarea').type(message);
+    cy.get('input').type(message);
     cy.get('button[id=quack-button]').click({ force: true });
 
     cy.wait(2000);
