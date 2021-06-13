@@ -1,7 +1,7 @@
 var baseURL = 'https://staging.quacker.nl/';
 
 Cypress.Commands.add('login', (username, pass) => {
-  cy.visit('localhost/login');
+  cy.visit(baseURL + 'login');
 
   cy.get('input[id=username-input]').type(username);
   cy.get('input[id=password-input').type(pass);
