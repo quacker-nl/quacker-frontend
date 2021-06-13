@@ -13,7 +13,9 @@ describe('Posting quacks', () => {
 
     var message = faker.random.words();
 
-    cy.get('input[id=quack-textarea]').type(message);
+    cy.wait(2000);
+
+    cy.get('textarea').type(message);
     cy.get('button[id=quack-button]').click({ force: true });
 
     cy.wait(2000);
