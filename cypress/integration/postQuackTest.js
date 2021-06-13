@@ -12,6 +12,6 @@ describe('Posting quacks', () => {
     cy.login(admin.username, admin.password);
 
     cy.get('textarea[id=quack-textarea]').type(faker.random.words());
-    cy.get('button[id=quack-button]').click();
+    cy.get('button[id=quack-button]').click({ force: true });
   });
 });
