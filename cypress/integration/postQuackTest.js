@@ -9,7 +9,7 @@ var admin = {
 
 describe('Posting quacks', () => {
   it('Post quack should show quack in timeline', () => {
-    cy.visit(baseURL + 'login');
+    cy.login(admin.username, admin.password);
 
     var message = faker.random.words();
 
