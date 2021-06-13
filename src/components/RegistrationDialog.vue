@@ -24,7 +24,7 @@
             <md-field :class="{ 'md-invalid': errors.length > 0 }">
               <label>Username</label>
               <md-input
-                id="username-input"
+                id="registration-username-input"
                 v-model="registration.username"
               ></md-input>
               <span class="md-error">{{ errors[0] }}</span>
@@ -38,7 +38,7 @@
             <md-field :class="{ 'md-invalid': errors.length > 0 }">
               <label>Email</label>
               <md-input
-                id="email-input"
+                id="registration-email-input"
                 v-model="registration.email"
               ></md-input>
               <span class="md-error">{{ errors[0] }}</span>
@@ -52,7 +52,7 @@
             <md-field :class="{ 'md-invalid': errors.length > 0 }">
               <label>Password</label>
               <md-input
-                id="password-input"
+                id="registration-password-input"
                 type="password"
                 v-model="registration.password"
               ></md-input>
