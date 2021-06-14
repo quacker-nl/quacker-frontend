@@ -116,17 +116,26 @@
             src="https://pv-c.nl/wp-content/uploads/2011/08/person-placeholder.jpg"
             alt="profile picture"
           />
-          <h3
-            @click="
-              $router.push({
-                name: 'Profile',
-                params: { username: quack.username },
-              })
-            "
-          >
-            {{ quack.username }}
-          </h3>
-          <p>{{ quack.createdOn | formatDate }}</p>
+          <div class="quack-header">
+            <h3
+              @click="
+                $router.push({
+                  name: 'Profile',
+                  params: { username: quack.username },
+                })
+              "
+            >
+              {{ quack.username }}
+            </h3>
+            <p>{{ quack.createdOn | formatDate }}</p>
+            <span
+              v-if="isAdmin"
+              @click="deleteQuack(quack.id)"
+              class="material-icons bin"
+            >
+              delete
+            </span>
+          </div>
         </div>
         <div class="quacked-col">
           <template v-for="(word, index) in quack.message.split(/[ ,]+/)"
@@ -198,10 +207,25 @@ export default {
         this.followed = false;
       });
     },
+    deleteQuack(id) {
+      QuackService.deleteQuack(id).then((response) => {
+        QuackService.getQuacksFromUser(this.$route.params.username).then(
+          (response) => {
+            this.quacks = response.data;
+            this.quacks.sort(function(a, b) {
+              return new Date(b.createdOn) - new Date(a.createdOn);
+            });
+          }
+        );
+      });
+    },
   },
   computed: {
     currentUser() {
       return this.$store.state.auth.user;
+    },
+    isAdmin() {
+      return this.$store.state.auth.user.userRoles.includes('Administrator');
     },
   },
   mounted() {
@@ -241,7 +265,7 @@ export default {
   filters: {
     formatDate: function(date) {
       if (date) {
-        return moment(String(date)).fromNow();
+        return moment(String(date)).format('MMMM Do YYYY');
       }
     },
     formatAccountDate: function(date) {

@@ -57,23 +57,32 @@
     </div>
     <div class="quack-row" v-for="quack in quacks" :key="quack.id">
       <div class="quack-picture-col">
-        <img
-          class="profile-picture"
-          :src="S3 + quack.username"
-          alt="profile picture"
-          @error="replaceByDefault"
-        />
-        <h3
-          @click="
-            $router.push({
-              name: 'Profile',
-              params: { username: quack.username },
-            })
-          "
-        >
-          {{ quack.username }}
-        </h3>
-        <p>{{ quack.createdOn | formatDate }}</p>
+        <div class="quack-header">
+          <img
+            class="profile-picture"
+            :src="S3 + quack.username"
+            alt="profile picture"
+            @error="replaceByDefault"
+          />
+          <h3
+            @click="
+              $router.push({
+                name: 'Profile',
+                params: { username: quack.username },
+              })
+            "
+          >
+            {{ quack.username }}
+          </h3>
+          <p>{{ quack.createdOn | formatDate }}</p>
+          <span
+            v-if="isAdmin"
+            @click="deleteQuack(quack.id)"
+            class="material-icons bin"
+          >
+            delete
+          </span>
+        </div>
       </div>
       <div class="quacked-col">
         <template v-for="(word, index) in quack.message.split(/[ ,]+/)"
@@ -140,6 +149,22 @@ export default {
       e.target.src =
         'https://pv-c.nl/wp-content/uploads/2011/08/person-placeholder.jpg';
     },
+    deleteQuack(id) {
+      QuackService.deleteQuack(id).then((response) => {
+        this.timelineLoaded = false;
+        TimelineService.getTimeline()
+          .then((response) => {
+            this.quacks = response.data;
+            this.quacks.sort(function(a, b) {
+              return new Date(b.createdOn) - new Date(a.createdOn);
+            });
+            this.timelineLoaded = true;
+          })
+          .catch((error) => {
+            this.timelineLoaded = false;
+          });
+      });
+    },
   },
   mounted() {
     TimelineService.getTimeline()
@@ -161,11 +186,14 @@ export default {
     S3() {
       return process.env.VUE_APP_S3;
     },
+    isAdmin() {
+      return this.$store.state.auth.user.userRoles.includes('Administrator');
+    },
   },
   filters: {
     formatDate: function(date) {
       if (date) {
-        return moment(String(date)).fromNow();
+        return moment(String(date)).format('MMMM Do YYYY');
       }
     },
   },
