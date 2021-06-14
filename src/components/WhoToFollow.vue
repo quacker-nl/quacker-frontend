@@ -6,6 +6,13 @@
       </div>
 
       <div class="follow-body">
+        <div
+          v-if="errorMessage"
+          class="error-container"
+          style="margin: 15px; padding: 15px"
+        >
+          <p>{{ errorMessage }}</p>
+        </div>
         <div class="loading-container" v-if="!usersLoaded">
           <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
         </div>
@@ -75,6 +82,7 @@ export default {
       trends: [],
       usersLoaded: false,
       trendsLoaded: false,
+      errorMessage: null,
     };
   },
   methods: {
@@ -96,10 +104,24 @@ export default {
     },
   },
   mounted() {
-    FollowService.getUnfollowedUsers().then((response) => {
-      this.users = response.data;
-      this.usersLoaded = true;
-    });
+    FollowService.getUnfollowedUsers()
+      .then((response) => {
+        this.users = response.data;
+        this.usersLoaded = true;
+      })
+      .catch((error) => {
+        this.usersLoaded = true;
+        if (!error.response) {
+          // network error
+          this.errorMessage = 'Network Error: the server could not be reached';
+        } else if (error.response.status === 502) {
+          this.errorMessage = 'Gateway error: the service could not be reached';
+        } else if (error.response.status === 400) {
+          this.errorMessage = error.response.data.Errors[0];
+        } else {
+          this.errorMessage = 'Something went wrong';
+        }
+      });
     QuackService.getTrends().then((response) => {
       this.trends = response.data;
       this.trendsLoaded = true;
